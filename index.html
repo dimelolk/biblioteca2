@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual Livros Mágicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Garamond', serif;
+        }
+
+        body {
+            background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #d4a373;
+            color: #3c2f2f;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #5c4033;
+            color: #f4e4bc;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 4px solid #3c2f2f;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav input {
+            padding: 0.6rem;
+            width: 220px;
+            border: 2px solid #3c2f2f;
+            border-radius: 4px;
+            background-color: #f4e4bc;
+            font-size: 1.1rem;
+        }
+
+        nav button {
+            padding: 0.6rem 1.2rem;
+            background-color: #8a5522;
+            color: #f4e4bc;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        nav button:hover {
+            background-color: #6b3e1a;
+        }
+
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .book {
+            background-color: #f4e4bc;
+            width: 220px;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 2px solid #8a5522;
+            transition: transform 0.3s;
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+        }
+
+        .book img {
+            width: 160px;
+            height: 220px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 1px solid #3c2f2f;
+        }
+
+        .book h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #3c2f2f;
+        }
+
+        .book p {
+            font-size: 1rem;
+            color: #5c4033;
+            margin-bottom: 1rem;
+        }
+
+        .desc-btn, .site-btn, .mark-btn {
+            background-color: #8a5522;
+            color: #f4e4bc;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .desc-btn:hover, .site-btn:hover {
+            background-color: #6b3e1a;
+        }
+
+        .mark-btn {
+            background-color: #5c4033;
+        }
+
+        .mark-btn:hover {
+            background-color: #3c2f2f;
+        }
+
+        .mark-btn.marked {
+            background-color: #7f7056;
+        }
+
+        .book-summary {
+            display: none;
+            font-size: 0.9rem;
+            color: #5c4033;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #e6d4a8;
+            border-radius: 4px;
+            border: 1px solid #8a5522;
+        }
+
+        footer {
+            background-color: #5c4033;
+            color: #f4e4bc;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 4px solid #3c2f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Biblioteca Virtual Livros Mágicos</h1>
+        <nav>
+            <input type="text" id="searchInput" placeholder="Pesquisar livros...">
+            <button onclick="searchBooks()">Pesquisar</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="book-container" id="bookList">
+            <div class="book">
+                <img src="imagens/principe.jpg" alt="Capa do livro">
+                <h3>O Pequeno Príncipe</h3>
+                <p>Autor: Antoine de Saint-Exupéry</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/o-pequeno-principe-01B-4918-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">Uma fábula sobre um jovem príncipe que explora planetas e reflete sobre a vida.</div>
+            </div>
+            <div class="book">
+                <img src="imagens/quixote.jpg" alt="Capa do livro">
+                <h3>Dom Quixote</h3>
+                <p>Autor: Miguel de Cervantes</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/don-quixote-squashed-edition-FVG-0315-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">As aventuras de um nobre que enlouquece lendo livros de cavalaria.</div>
+            </div>
+            <div class="book">
+                <img src="imagens/porco.jpg" alt="Capa do livro">
+                <h3>1984</h3>
+                <p>Autor: George Orwell</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/1984-017-4778-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">Um clássico distópico sobre vigilância e totalitarismo.</div>
+            </div>
+            <div class="book">
+                <img src="imagens/jane.jpg" alt="Capa do livro">
+                <h3>Orgulho e Preconceito</h3>
+                <p>Autor: Jane Austen</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/orgulho-e-preconceito-06V-1689-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">Um romance sobre amor e classes sociais na Inglaterra do século XIX.</div>
+            </div>
+            <div class="book">
+                <img src="imagens/cem.jpg" alt="Capa do livro">
+                <h3>Cem Anos de Solidão</h3>
+                <p>Autor: Gabriel García Márquez</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/cem-anos-de-solidao-07H-2906-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">A saga de uma família ao longo de gerações em um mundo mágico.</div>
+            </div>
+            <div class="book">
+                <img src="imagens/amel.jpg" alt="Capa do livro">
+                <h3>O Senhor dos Anéis</h3>
+                <p>Autor: J.R.R. Tolkien</p>
+                <button class="desc-btn" onclick="toggleDescription(this)">Descrição</button>
+                <button class="site-btn" onclick="visitSite('https://www.estantevirtual.com.br/livro/a-sociedade-do-anel-capa-os-aneis-de-poder-03J-2271-000-BK')">Visitar Site</button>
+                <button class="mark-btn" onclick="toggleMark(this)">Marcar como Lido</button>
+                <div class="book-summary">Uma épica aventura de fantasia sobre a luta entre bem e mal.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Biblioteca Virtual - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        function searchBooks() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const books = document.getElementsByClassName('book');
+            
+            for (let book of books) {
+                const title = book.getElementsByTagName('h3')[0].textContent.toLowerCase();
+                const author = book.getElementsByTagName('p')[0].textContent.toLowerCase();
+                
+                if (title.includes(searchInput) || author.includes(searchInput)) {
+                    book.style.display = 'block';
+                } else {
+                    book.style.display = 'none';
+                }
+            }
+        }
+
+        function toggleDescription(button) {
+            const summary = button.nextElementSibling.nextElementSibling.nextElementSibling;
+            if (summary.style.display === 'block') {
+                summary.style.display = 'none';
+                button.textContent = 'Descrição';
+            } else {
+                summary.style.display = 'block';
+                button.textContent = 'Esconder';
+            }
+        }
+
+        function toggleMark(button) {
+            if (button.classList.contains('marked')) {
+                button.classList.remove('marked');
+                button.textContent = 'Marcar como Lido';
+            } else {
+                button.classList.add('marked');
+                button.textContent = 'Marcado como Lido';
+            }
+        }
+
+        function visitSite(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
